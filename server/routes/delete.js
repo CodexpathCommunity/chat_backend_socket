@@ -1,14 +1,11 @@
 import express from "express";
 //controllers
-import {
-  deleteRoomByRoomId,
-  deleteMessageById,
-} from "../controllers/delete.js";
+import deleteController from "../controllers/delete.js";
 
 const router = express.Router();
 
 router
-  .delete("/room/:roomId", deleteRoomByRoomId)
-  .delete("/message/:messageId", deleteMessageById);
+  .delete("/room/:roomId", deleteController.deleteRoomByRoomId)
+  .delete("/message/:messageId", deleteController.deleteMessageById);
 
 export default router;

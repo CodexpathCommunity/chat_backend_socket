@@ -1,20 +1,14 @@
 import express from "express";
 //controllers
-import {
-  getRecentConversation,
-  getConversationsByRoomId,
-  initiate,
-  postMessage,
-  markConversationsReadByRoomId,
-} from "../controllers/chatRoom.js";
+import chatRoom from "../controllers/chatRoom.js";
 
 const router = express.Router();
 
 router
-  .get("/", getRecentConversation)
-  .get("/:id", getConversationsByRoomId)
-  .post("/initiate", initiate)
-  .post("/:roomId/message", postMessage)
-  .put("/:roomId/mark-read", markConversationsReadByRoomId);
+  .get("/", chatRoom.getRecentConversation)
+  .get("/:id", chatRoom.getConversationsByRoomId)
+  .post("/initiate", chatRoom.initiate)
+  .post("/:roomId/message", chatRoom.postMessage)
+  .put("/:roomId/mark-read", chatRoom.markConversationsReadByRoomId);
 
 export default router;

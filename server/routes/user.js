@@ -1,19 +1,14 @@
 import express from "express";
 
 //controllers
-import {
-  onGetAllUsers,
-  onGetUserById,
-  onCreateUser,
-  onDeleteUserById,
-} from "../controllers/user.js";
+import user from "../controllers/user.js";
 
 const router = express.Router();
 
 router
-  .get("/", onGetAllUsers)
-  .get("/:id", onGetUserById)
-  .post("/", onCreateUser)
-  .delete("/:id", onDeleteUserById);
+  .get("/", user.onGetAllUsers)
+  .get("/:id", user.onGetUserById)
+  .post("/", user.onCreateUser)
+  .delete("/:id", user.onDeleteUserById);
 
 export default router;

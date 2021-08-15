@@ -1,43 +1,44 @@
-import express from "express";
 import http from "http";
+import express from "express";
 import logger from "morgan";
 import cors from "cors";
-// routes
-import indexRouter from "./routes/index.js";
-import userRouter from "./routes/user.js";
-import chatRoomRouter from "./routes/chatRoom.js";
-import deleteRouter from "./routes/delete.js";
-//middlware
-import { decode } from "./middlewares/jwt.js";
 
-//initialize express
+// // routes
+// import indexRouter from "./routes/index.js";
+// import userRouter from "./routes/user.js";
+// import chatRoomRouter from "./routes/chatRoom.js";
+// import deleteRouter from "./routes/delete.js";
+// // middlewares
+import { decode } from "./middlwares/jwt";
+
 const app = express();
 
-//get port from environment and store in Express
-const port = process.env.PORT || 3000;
+/** Get port from environment and store in Express. */
+const port = process.env.PORT || "3000";
 app.set("port", port);
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", indexRouter);
-app.use("/users", userRouter);
-app.use("/room", decode, chatRoomRouter);
-app.use("/delete", deleteRouter);
-//catch 404 error and forward to error handlers
+// app.use("/", indexRouter);
+// app.use("/users", userRouter);
+// app.use("/room", decode, chatRoomRouter);
+// app.use("/delete", deleteRouter);
+
+/** catch 404 and forward to error handler */
 app.use("*", (req, res) => {
   return res.status(404).json({
     success: false,
-    message: "Api does not exist",
+    message: "API endpoint doesnt exist",
   });
 });
 
-//create http server
+/** Create HTTP server. */
 const server = http.createServer(app);
-//listen on provided port
+/** Listen on provided port, on all network interfaces. */
 server.listen(port);
-//event listener for http server
+/** Event listener for HTTP server "listening" event. */
 server.on("listening", () => {
-  console.log(`server listening on port :: http://localhost:${port}`);
+  console.log(`Listening on port:: http://localhost:${port}`);
 });
